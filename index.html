@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desbloqueador por Clave Secreta</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; box-sizing: border-box; }
+        .container { background: #1e293b; padding: 25px; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        input[type="text"] { width: 100%; background: #0f172a; color: #38bdf8; border: 1px solid #475569; border-radius: 6px; padding: 12px; margin-top: 8px; box-sizing: border-box; font-size: 16px; outline: none; text-transform: uppercase; }
+        input[type="text"]:focus { border-color: #38bdf8; }
+        h2 { text-align: center; color: #38bdf8; margin-top: 0; }
+        label { font-size: 14px; color: #94a3b8; }
+        .output { margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 6px; border: 1px solid #334155; word-break: break-word; min-height: 50px; color: #4ade80; font-size: 16px; text-align: center; display: flex; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Acceso Restringido</h2>
+        <label for="inputClave">Ingresa tu clave secreta (Solo Mayúsculas):</label>
+        <input type="text" id="inputClave" placeholder="ESCRIBE LA CLAVE AQUÍ..." oninput="verificarClave()">
+        
+        <div id="resultado" class="output">Esperando clave...</div>
+    </div>
+
+    <script>
+        // Define aquí tu clave secreta (debe estar en mayúsculas)
+        const CLAVE_SECRETA = "DUFKLFRPRGR"; 
+        
+        // Mensaje oculto que se revelará al atinar la clave
+        const MENSAJE_OCULTO = "La verdadera felicidad no consiste en tenerlo todo, sino en no desear nada";
+
+        function verificarClave() {
+            let inputElement = document.getElementById('inputClave');
+            
+            // Fuerza a que el valor del input se transforme a mayúsculas automáticamente mientras escribes
+            inputElement.value = inputElement.value.toUpperCase();
+            
+            let ingreso = inputElement.value.trim();
+            let salida = document.getElementById('resultado');
+            
+            if (!ingreso) {
+                salida.textContent = "Esperando clave...";
+                salida.style.color = "#4ade80";
+                return;
+            }
+
+            // Compara la clave ingresada con la clave secreta
+            if (ingreso === CLAVE_SECRETA) {
+                salida.textContent = MENSAJE_OCULTO;
+                salida.style.color = "#4ade80";
+            } else {
+                salida.textContent = "❌ Clave incorrecta.";
+                salida.style.color = "#f87171";
+            }
+        }
+    </script>
+</body>
+</html>
